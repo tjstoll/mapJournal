@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MapJournal - V2</title>
+
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+     <!-- BootStrap CSS -->
+     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"> -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="app.css">
+</head>
+<body>
+    <main>
+        <section class="inputArea">
+            <header>
+                <h1>MapJournal - Demo</h1>
+                <h2>TL;DR!</h2>
+                <p>Click the map to get coordinates or enter them manually. Then use the form to create your post.</p>
+                <h2>About</h2>
+                <p>A map based journal that uses location to organize post entries instead of pages. It uses pure JavaScript, HTML, and CSS. Leaflet is also used to create the map and all of its functions.</p>
+                <p>This is a very rough draft.</p>
+                <h2>Current Features</h2>
+                <ul>
+                    <li>Populate lat/long field straight from map</li>
+                    <li>Create a journal entry and open it</li>
+                    <li>Best for desktop</li>
+                </ul>
+                <h2>Future Features</h2>
+                <ul>
+                    <li>Centre map on user's current location</li>
+                    <li>Add custom image to post</li>
+                    <li>Delete posts and markers</li>
+                    <li>Show all posts</li>
+                    <li>Add more components to post (paragraphs, images, etc.)</li>
+                    <li>Create button on post to focus on its map marker</li>
+                    <li>Make mobile friendly</li>
+                    <li>Save posts to database</li>
+                </ul>
+            </header>
+            <article>
+                <h2>Create A New Post</h2>
+                <form name="post_form" action="" onsubmit="createPost(event)">
+                    <input id="title" name="title" type="text" placeholder="Journal Title">
+                    <input type="text" name="img-url" placeholder="Image url (https://picsum.photos/300/200)" disabled>
+                    <div id="latlong-area">
+                        <input id="lat" name="lat" type="number" min="-86" max="86" step="0.00000000000001" placeholder="lat" required>
+                        <input id="long" name="long" type="number" min="-160" max="160" step="0.00000000000001" placeholder="long" required>
+                    </div>
+                    <textarea id="entry" name="entry" id="" placeholder="Journal entry goes here..."></textarea>
+                    <button id="submit-button" type="submit" name="submit">Create Post</button>
+                </form>
+            </article>
+            <article id="posts">
+                <button id="closePosts" onclick="closePosts()">&#10006;</button>
+                 <!-- <h2>Journal Entries</h2> -->
+                <!-- <div class="post">
+                    <h2 class="postTitle">Demo Post Title</h2>
+                    <img src="https://picsum.photos/600/400" alt="random picture" class="postImage">
+                    <p>Lat, long</p>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem ipsa accusantium incidunt, labore a enim voluptate eius dicta fugit temporibus amet excepturi iure tempora nostrum alias, esse quisquam maiores pariatur.</p>
+                </div> -->
+            </article>
+        </section>
+        <section id="map"></section>
+    </main>
+
+    <footer>made with &#127752; and &#127775; by tjstoll | 2025</footer>
+
+     <!-- Leaflest JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+     <!-- BootStrap JS -->
+     <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script> -->
+    <!-- JS -->
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+html {
+    /* font-size: 16pt; */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    display: flex;
+    flex-direction: row;
+    height: 98vh;
+}
+
+header {
+    border-bottom: 1px solid grey;
+    padding: 1em;
+    max-height: 30%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-color: black none;
+    scrollbar-width: thin;
+    background-color: rgb(243, 243, 243);
+}
+
+article {
+    padding: 1em 2em;
+}
+
+button:hover {
+    cursor: pointer;
+}
+#map {
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.inputArea {
+    width: 40%;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-color: black none;
+    scrollbar-width: thin;
+}
+/* Form */
+/* ===================================================================== */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+input {
+    padding: 0.5em;
+    border: 1px solid grey;
+}
+textarea {
+    padding: 0.5em;
+}
+#title {
+    font-size: larger;
+}
+input[type=number] {
+    width: 45%;
+}
+#latlong-area {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#entry {
+    height: 100px;
+    resize: none;
+}
+#submit-button {
+    padding: 1em;
+    background-color: rgb(56, 149, 255);
+    color: white;
+}
+
+/* Post */
+/* ==================================================================== */
+#posts {
+    display: none;
+    position: absolute;
+    z-index: 2;
+    top: 0px;
+    right: 0px;
+    height: 95%;
+    width: 30%;
+    background-color: white;
+    border-radius: 10px;
+    margin: 1%;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    scrollbar-color: black none;
+    scrollbar-width: thin;
+}
+
+.post {
+    display: none;
+}
+.post p, .post h2 {
+    padding: 0 1em;
+}
+#closePosts {
+    position: absolute;
+    z-index: 3;
+    top: 0px;
+    right: 0px;
+    margin: 1%;
+    border: none;
+    font-size: 1.5em;
+    background-color: rgba(255,255,255,0.25);
+    color: grey;
+}
+#closePosts:hover {
+    cursor: pointer;
+    background-color: white;
+}
+.postImage {
+    height: 40%;
+    width: 100%;
+    object-position: center;
+    object-fit: cover;
+    background-color: grey;
+}
+
+/* Footer */
+/* ==================================================================== */
+footer {
+    text-align: center;
+    height: 2vh;
+    overflow-x: hidden;
+    font-size: 10pt;
+}
