@@ -37,17 +37,33 @@ function goToMarker(coords) {
     map.flyTo(coords, 14);
 }
 
-function openPost(id) {
-    closePosts();
-    const post = document.getElementById(`${id}`);
-    post.style.display = 'block';
-    const posts = document.getElementById('posts');
-    posts.style.display = 'block';
+function getData(file_name) {
+    let data = fs.readFileSync(file_name, (err, data) => {
+        if (err) {
+            console.log('something went wrong');
+            return;
+        }
+
+        // parsedData =  JSON.parse(data);
+        console.log("Data retrieval was successful");
+    })
+
+    return JSON.parse(data);
 }
 
-// Create post
-function createPost(e) {
+function writeDataToFile(file_name, new_data) {
+    fs.writeFileSync(file_name, JSON.stringify(new_data), null, 2), (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+        console.log('Data write successful');
+    }
+}
 
+// Create post json
+function getPostFormData(e) {
+    // Prevent form from submitting
     e.preventDefault();
 
     // Get data from form
@@ -56,17 +72,36 @@ function createPost(e) {
     const long = form["long"].value;
     const title = form["title"].value;
     const entry = form["entry"].value;
+    form.reset();
 
-    // Create post and put in posts div
-    // Create the marker and place on map
-    const id = self.crypto.randomUUID();
+    // Create json object and populate
+    const postJSON = {
+        "id": self.crypto.randomUUID(),
+        "title": title,
+        "lat": lat,
+        "long": long,
+        "entry": entry
+    };
+
+    return postJSON;
+}
+
+// Make the marker and add to map
+function makeMarker(postData) {
+    // Make marker
+    var marker = L.marker([postData.lat, postData.long]).addTo(map);
+    marker.bindPopup(`<b>${postData.title}</b><br><button onclick=openPost('${postData.id}')>Read more...</button>`).openPopup();
+}
+
+// Create post
+function createPost(postData) {
     const posts_div = document.getElementById('posts');
     const post = document.createElement('section');
     post.classList.add('post');
-    post.id = id;
+    post.id = postData.id;
 
     const post_title = document.createElement('h2');
-    const post_title_text = document.createTextNode(title);
+    const post_title_text = document.createTextNode(postData.title);
     post_title.appendChild(post_title_text);
 
     const img = document.createElement('img');
@@ -75,18 +110,18 @@ function createPost(e) {
     img.alt = "Random Image";
 
     const coords = document.createElement('button');
-    const coords_text = document.createTextNode(`${lat} °N; ${long} °E`);
+    const coords_text = document.createTextNode(`${postData.lat} °N; ${postData.long} °E`);
     const marker_icon = document.createElement('i');
     const marker_icon_text = document.createTextNode('place');
     marker_icon.classList.add('material-icons');
     marker_icon.appendChild(marker_icon_text);
     coords.appendChild(marker_icon);
     coords.appendChild(coords_text);
-    coords.addEventListener("click", () => {goToMarker([lat, long])});
+    coords.addEventListener("click", () => {goToMarker([postData.lat, postData.long])});
     coords.classList.add('coordButton');
 
     const post_entry = document.createElement('p');
-    const post_entry_text = document.createTextNode(entry);
+    const post_entry_text = document.createTextNode(postData.entry);
     post_entry.appendChild(post_entry_text);
 
     post.appendChild(post_title);
@@ -95,11 +130,23 @@ function createPost(e) {
     post.appendChild(post_entry);
 
     posts_div.appendChild(post);
-    
-    // Make marker
-    var marker = L.marker([lat, long]).addTo(map);
-    marker.bindPopup(`<b>${title}</b><br><button onclick=openPost('${id}')>Read more...</button>`).openPopup();
-    form.reset();
+}
+
+function handlePostCreation(e) {
+    const postData = getPostFormData(e);
+
+    //Save post to json file
+
+    makeMarker(postData);
+    createPost(postData);
+}
+
+function openPost(id) {
+    closePosts();
+    const post = document.getElementById(`${id}`);
+    post.style.display = 'block';
+    const posts = document.getElementById('posts');
+    posts.style.display = 'block';
 }
 
 function closePosts() {
