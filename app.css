@@ -14,15 +14,30 @@ main {
     height: 98vh;
 }
 
+.inputArea {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    max-width: 30%;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
 header {
     border-bottom: 1px solid grey;
     padding: 1em;
+    min-height: 100px;
     max-height: 30%;
     overflow-x: hidden;
     overflow-y: scroll;
-    scrollbar-color: black none;
-    scrollbar-width: thin;
     background-color: rgb(243, 243, 243);
+}
+
+#create-post {
+    /* max-height: 30px; */
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
 article {
@@ -38,13 +53,15 @@ button:hover {
     z-index: 1;
 }
 
-.inputArea {
-    width: 40%;
-    overflow-x: hidden;
-    overflow-y: scroll;
-    scrollbar-color: black none;
-    scrollbar-width: thin;
+/* Scroll bar */
+/* ===================================================================== */
+::-webkit-scrollbar {
+    width: 10px;
 }
+::-webkit-scrollbar-thumb {
+    background: grey;
+}
+
 /* Form */
 /* ===================================================================== */
 form {
@@ -89,7 +106,7 @@ input[type=number] {
     top: 0px;
     right: 0px;
     height: 95%;
-    width: 30%;
+    width: 400px;
     background-color: white;
     border-radius: 10px;
     margin: 1%;
@@ -97,8 +114,6 @@ input[type=number] {
     box-sizing: border-box;
     overflow-x: hidden;
     overflow-y: scroll;
-    scrollbar-color: black none;
-    scrollbar-width: thin;
 }
 
 .post {
