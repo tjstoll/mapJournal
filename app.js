@@ -34,7 +34,7 @@ map.on('click', onMapClick);
 
 // Pan to area of map where post is
 function goToMarker(coords) {
-    map.panTo(new L.LatLng(coords[0], coords[1]));
+    map.flyTo(coords, 14);
 }
 
 function openPost(id) {
@@ -73,14 +73,19 @@ function createPost(e) {
     img.classList.add('postImage');
     img.alt = "Random Image";
 
-    // const coords = document.createElement('button');
-    // const coords_text = document.createTextNode("Go to marker");
-    // coords.appendChild(coords_text)
-    // coords.addEventListener("click", goToMarker([lat, long]));
-    // coords.classList.add('coordButton');
-    const coords = document.createElement('p');
-    const coords_text = document.createTextNode(`${lat} °N, ${long} °E`);
+    const coords = document.createElement('button');
+    const coords_text = document.createTextNode(`${lat} °N; ${long} °E`);
+    const marker_icon = document.createElement('i');
+    const marker_icon_text = document.createTextNode('place');
+    marker_icon.classList.add('material-icons');
+    marker_icon.appendChild(marker_icon_text);
+    coords.appendChild(marker_icon);
     coords.appendChild(coords_text);
+    coords.addEventListener("click", () => {goToMarker([lat, long])});
+    coords.classList.add('coordButton');
+    // const coords = document.createElement('p');
+    // const coords_text = document.createTextNode(`${lat} °N, ${long} °E`);
+    // coords.appendChild(coords_text);
 
     const post_entry = document.createElement('p');
     const post_entry_text = document.createTextNode(entry);

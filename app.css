@@ -122,6 +122,16 @@ input[type=number] {
 .post p, .post h2 {
     padding: 0 1em;
 }
+.coordButton {
+    margin: 1em;
+    font-size: 12px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.coordButton i {
+    font-size: 12px;
+}
 #closePosts {
     position: absolute;
     z-index: 3;
