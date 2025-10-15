@@ -106,7 +106,7 @@ input[type=number] {
     top: 0px;
     right: 0px;
     height: 95%;
-    width: 400px;
+    width: 500px;
     background-color: white;
     border-radius: 10px;
     margin: 1%;
@@ -121,6 +121,7 @@ input[type=number] {
 }
 .post p, .post h2 {
     padding: 0 1em;
+    white-space-collapse: preserve;
 }
 .coordButton {
     margin: 1em;

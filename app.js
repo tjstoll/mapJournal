@@ -32,7 +32,7 @@ function onMapClick(e) {
 }
 map.on('click', onMapClick);
 
-// Pan to area of map where post is
+// Fly to area of map where post is and zoom in
 function goToMarker(coords) {
     map.flyTo(coords, 14);
 }
@@ -58,9 +58,10 @@ function createPost(e) {
     const entry = form["entry"].value;
 
     // Create post and put in posts div
+    // Create the marker and place on map
     const id = self.crypto.randomUUID();
     const posts_div = document.getElementById('posts');
-    const post = document.createElement('div');
+    const post = document.createElement('section');
     post.classList.add('post');
     post.id = id;
 
@@ -83,9 +84,6 @@ function createPost(e) {
     coords.appendChild(coords_text);
     coords.addEventListener("click", () => {goToMarker([lat, long])});
     coords.classList.add('coordButton');
-    // const coords = document.createElement('p');
-    // const coords_text = document.createTextNode(`${lat} °N, ${long} °E`);
-    // coords.appendChild(coords_text);
 
     const post_entry = document.createElement('p');
     const post_entry_text = document.createTextNode(entry);
@@ -106,8 +104,8 @@ function createPost(e) {
 
 function closePosts() {
     const posts = document.getElementById("posts");
-    
     const all_posts = posts.getElementsByClassName('post');
+
     for (let post of all_posts) {
         post.style.display = 'none';
     }
